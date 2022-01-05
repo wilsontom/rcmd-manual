@@ -1,10 +1,16 @@
-name: rcmd-manual-build
+name: Docker
 
 on:
   push:
+    # Publish `master` as Docker `latest` image.
     branches:
       - master
 
+    # Publish `v1.2.3` tags as releases.
+    tags:
+      - v*
+
+  # Run tests for any PRs.
   pull_request:
 
 env:
@@ -16,15 +22,6 @@ jobs:
 
       runs-on: ubuntu-latest
       
-  
-  schedule:
-    - cron: '0 0 * * 0'
-  
-jobs:
-  
-    rmcd-manual:
-      runs-on: ubuntu-20.04
-
       steps:
         - uses: actions/checkout@v2
 
@@ -36,11 +33,11 @@ jobs:
           run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       
         - name: Build image
-          run: docker build . --build-arg GITHUB_PAT=${{ secrets.GITHUB_TOKEN }} --file ./Dockerfile --tag rcmd-manual
+          run: docker build . --build-arg GITHUB_PAT=${{ secrets.GITHUB_TOKEN }} --file Dockerfile --tag rcmd-manual
 
         - name: Push image
           run: |
-            IMAGE_ID=ghcr.io/wilsontom/rcmd-manual
+            IMAGE_ID=ghcr.io/wilsontom/ridb
           
             VERSION=${{ steps.date.outputs.date }}
             echo IMAGE_ID=$IMAGE_ID

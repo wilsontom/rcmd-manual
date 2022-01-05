@@ -7,5 +7,5 @@
 From within the root directory of a local R package, run the following:
 
 ```sh
-docker run -v $(pwd):/build docker.pkg.github.com/wilsontom/rmd-manual/rcmd-manual:latest
+docker run -v $(pwd):/build ghcr.io/wilsontom/rcmd-manual:latest
 ```

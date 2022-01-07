@@ -4,7 +4,7 @@
 
 > **Build a documentation manual for R packages**
 
-From within the root directory of a local R package, run the following:
+##### From within the root directory of an R package, run the following:
 
 ```sh
 docker run -v $(pwd):/build ghcr.io/wilsontom/rcmd-manual:latest
